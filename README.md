@@ -5,8 +5,15 @@ A library management system built with Java to practice object-oriented programm
 
 - Register books
 - List books
-- Borrow books
-- Return books
+- Register users
+- List users
+- Interactive console menu
+
+## Next Features
+
+- Book loan registration
+- Return borrowed books
+- List active loans
 
 ## Technologies
 
