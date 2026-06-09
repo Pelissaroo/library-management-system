@@ -1,15 +1,19 @@
 package br.com.pelissaro.librarySystem.App;
 
-import br.com.pelissaro.librarySystem.Service.BookService;
-import br.com.pelissaro.librarySystem.Service.UserService;
+import br.com.pelissaro.librarySystem.Domain.Book;
+import br.com.pelissaro.librarySystem.Domain.User;
+import br.com.pelissaro.librarySystem.Service.bookService;
+import br.com.pelissaro.librarySystem.Service.userService;
+import br.com.pelissaro.librarySystem.Service.loanService;
 
 import java.util.Scanner;
 
-public class LibraryApp {
+public class libraryApp {
     public static void startLibrary(){
 
-            BookService bookService = new BookService();
-            UserService userService = new UserService();
+            bookService bookService = new bookService();
+            userService userService = new userService();
+            loanService loanService = new loanService();
             Scanner scanner = new Scanner(System.in);
 
             boolean running = true;
@@ -22,8 +26,10 @@ public class LibraryApp {
             System.out.println("-- Menu --");
             System.out.println("1 - Show users");
             System.out.println("2 - Show books");
-            System.out.println("3 - Register Book ");
-            System.out.println("4 - Register User ");
+            System.out.println("3 - List loans");
+            System.out.println("4 - Register Book ");
+            System.out.println("5 - Register User ");
+                System.out.println("6 - New Loan ");
                 System.out.println("0 - Exit program.");
             int choose = scanner.nextInt();
             scanner.nextLine();
@@ -35,7 +41,7 @@ public class LibraryApp {
                 case 2:
                     bookService.showBooks();
                     break;
-                case 3:
+                case 4:
                     System.out.println("Enter the book title: ");
                     String inputTitle = scanner.nextLine();
                     if (inputTitle.trim().isEmpty()){
@@ -51,7 +57,7 @@ public class LibraryApp {
                     System.out.println("Book created successfully!");
                     break;
 
-                case 4:
+                case 5:
                     System.out.println("Username: ");
                     String inputName = scanner.nextLine();
                     if (inputName.trim().isEmpty()){
@@ -83,6 +89,22 @@ public class LibraryApp {
                     userService.CadasterUser(inputName, inputCPF, inputAddress, numberAddress, inputPhoneNumber);
                     System.out.println("User created successfully!");
                     break;
+
+                case 6:
+                    System.out.println("Book ID : ");
+                    int inputIdBook = scanner.nextInt();
+                    Book findedBook = bookService.findBookByID(inputIdBook);
+                    System.out.println("User ID : ");
+                    int inputIdUser = scanner.nextInt();
+                    User findedUser = userService.findUserByID(inputIdUser);
+                    loanService.borrow(findedBook, findedUser);
+                    System.out.println("Loan Created Sucefully! ");
+                    break;
+
+                case 3:
+                    loanService.listLoans();
+                    break;
+
                 case 0:
                     running = false;
                     break;

@@ -1,11 +1,11 @@
 package br.com.pelissaro.librarySystem;
 
 
-import br.com.pelissaro.librarySystem.App.LibraryApp;
+import br.com.pelissaro.librarySystem.App.libraryApp;
 
 
 public class Main {
     public static void main(String[] args) {
-        LibraryApp.startLibrary();
+        libraryApp.startLibrary();
     }
 }

@@ -5,7 +5,7 @@ import br.com.pelissaro.librarySystem.Domain.Book;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookRepository {
+public class bookRepository {
     private ArrayList<Book> books = new ArrayList<>();
 
     public void addBooks(Book book) {
@@ -16,5 +16,12 @@ public class BookRepository {
         return books;
     }
 
+    public Book findById(int id){
+        for (Book book: books) {
+            if (book.getId() == id)
+                return book;
+        }
+        return null;
+    }
 }
 

@@ -30,11 +30,9 @@ public class Book {
         return author;
     }
 
-    public boolean isAvailable(boolean b) {
+    public boolean isAvailable() {
         return available;
     }
-
-
 
     public void setTitle(String title) {
         this.title = title;
@@ -42,6 +40,10 @@ public class Book {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public void markAsBorrowed(){
+        available = false;
     }
 
     @Override

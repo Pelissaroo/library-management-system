@@ -8,6 +8,7 @@ public class User {
     private String address;
     private int adressNumber;
     private String phoneNumber;
+    private boolean active;
 
     public User(String name, String cpf, String adress, int adressNumber, String phoneNumber) {
         this.name = name;
@@ -16,6 +17,7 @@ public class User {
         this.adressNumber = adressNumber;
         this.phoneNumber = phoneNumber;
         id = ++nextId;
+        this.active = true;
     }
 
     public String getName() {
@@ -60,6 +62,10 @@ public class User {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public boolean isActive() {
+        return active;
     }
 
     @Override
