@@ -3,20 +3,19 @@ package br.com.pelissaro.librarySystem.Domain;
 public class User {
     private String name;
     private int id;
-    private int nextId;
     private String cpf;
     private String address;
     private int adressNumber;
     private String phoneNumber;
     private boolean active;
 
-    public User(String name, String cpf, String adress, int adressNumber, String phoneNumber) {
+    public User(String name,int id, String cpf, String adress, int adressNumber, String phoneNumber) {
         this.name = name;
+        this.id = id;
         this.cpf = cpf;
         this.address = adress;
         this.adressNumber = adressNumber;
         this.phoneNumber = phoneNumber;
-        id = ++nextId;
         this.active = true;
     }
 
