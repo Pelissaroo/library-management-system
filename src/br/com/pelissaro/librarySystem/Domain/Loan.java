@@ -30,10 +30,9 @@ public class Loan {
 
     @Override
     public String toString() {
-        return "Loan{" +
-                "book=" + book +
-                ", user=" + user +
-                ", loanID=" + loanID +
-                '}';
+        return  "loanID=" + loanID +
+                "| " +
+                getBook() +
+                getUser();
     }
 }

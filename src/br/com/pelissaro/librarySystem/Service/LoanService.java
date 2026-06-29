@@ -6,7 +6,7 @@ import br.com.pelissaro.librarySystem.Domain.Loan;
 import br.com.pelissaro.librarySystem.Domain.User;
 import br.com.pelissaro.librarySystem.Repository.loanRepository;
 
-public class loanService {
+public class LoanService {
     loanRepository loanRepository = new loanRepository();
     private int nextLoanID;
 

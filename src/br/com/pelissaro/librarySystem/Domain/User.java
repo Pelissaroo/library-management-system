@@ -5,7 +5,7 @@ public class User {
     private int id;
     private String cpf;
     private String address;
-    private int adressNumber;
+    private int addressNumber;
     private String phoneNumber;
     private boolean active;
 
@@ -14,7 +14,7 @@ public class User {
         this.id = id;
         this.cpf = cpf;
         this.address = adress;
-        this.adressNumber = adressNumber;
+        this.addressNumber = adressNumber;
         this.phoneNumber = phoneNumber;
         this.active = true;
     }
@@ -47,12 +47,12 @@ public class User {
         this.address = address;
     }
 
-    public int getAdressNumber() {
-        return adressNumber;
+    public int getAddressNumber() {
+        return addressNumber;
     }
 
-    public void setAdressNumber(int adressNumber) {
-        this.adressNumber = adressNumber;
+    public void setAddressNumber(int addressNumber) {
+        this.addressNumber = addressNumber;
     }
 
     public String getPhoneNumber() {
@@ -73,9 +73,9 @@ public class User {
                 "name='" + name + '\'' +
                 ", cpf='" + cpf + '\'' +
                 ", address='" + address + '\'' +
-                ", adressNumber=" + adressNumber +
+                ", adressNumber=" + addressNumber +
                 ", phoneNumber='" + phoneNumber + '\'' +
-                ", id=" + id +
+                ", UserId=" + id +
                 '}';
     }
 }

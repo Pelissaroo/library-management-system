@@ -3,7 +3,7 @@ package br.com.pelissaro.librarySystem.Service;
 import br.com.pelissaro.librarySystem.Repository.bookRepository;
 import br.com.pelissaro.librarySystem.Domain.Book;
 
-public class bookService {
+public class BookService {
     bookRepository bookRepository = new bookRepository();
 
     public void createNewBook(String title, String author){
@@ -20,5 +20,15 @@ public class bookService {
     public Book findBookByID(int id){
         return bookRepository.findById(id);
     }
+
+    public void updateTitle(Book book, String title){
+        book.setTitle(title);
+    }
+
+    public void updateAuthor(Book book, String author){
+        book.setAuthor(author);
+    }
+
+
 
 }
