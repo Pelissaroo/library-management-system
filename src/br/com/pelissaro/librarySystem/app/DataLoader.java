@@ -1,7 +1,7 @@
-package br.com.pelissaro.librarySystem.App;
+package br.com.pelissaro.librarySystem.app;
 
-import br.com.pelissaro.librarySystem.Service.BookService;
-import br.com.pelissaro.librarySystem.Service.UserService;
+import br.com.pelissaro.librarySystem.service.BookService;
+import br.com.pelissaro.librarySystem.service.UserService;
 
 public class DataLoader {
 
@@ -12,8 +12,8 @@ public class DataLoader {
         bookService.createNewBook("O universo da programação", "Willian Oliveira");
         bookService.createNewBook("Algoritmos e programação", "Marco Medina");
 
-        userService.registerUser("Caio", "123.456.789-10", "Rua sao paulo", 10, "(33) 9 3333-3333");
-        userService.registerUser("Sofia", "012.987.654-32", "Rua Brasil", 20, "(44) 9 4444-4444");
-        userService.registerUser("Pedro", "999.888.777-66", "Rua Caetano", 30, "(33) 9 5555-5555");
+        userService.registerUser("Caio", "12345678910", "Rua sao paulo", 10, "33933333333");
+        userService.registerUser("Sofia", "01298765432", "Rua Brasil", 20, "44944444444");
+        userService.registerUser("Pedro", "99988877766", "Rua Caetano", 30, "33955555555");
     }
 }

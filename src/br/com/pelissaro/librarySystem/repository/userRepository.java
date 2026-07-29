@@ -1,7 +1,6 @@
-package br.com.pelissaro.librarySystem.Repository;
+package br.com.pelissaro.librarySystem.repository;
 
-import br.com.pelissaro.librarySystem.Domain.Book;
-import br.com.pelissaro.librarySystem.Domain.User;
+import br.com.pelissaro.librarySystem.domain.User;
 
 import java.util.ArrayList;
 import java.util.List;

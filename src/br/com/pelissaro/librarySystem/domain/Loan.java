@@ -1,4 +1,4 @@
-package br.com.pelissaro.librarySystem.Domain;
+package br.com.pelissaro.librarySystem.domain;
 
 public class Loan {
     private Book book;
@@ -30,7 +30,7 @@ public class Loan {
 
     @Override
     public String toString() {
-        return  "loanID=" + loanID +
+        return  "loanID= " + loanID +
                 "| " +
                 getBook() +
                 getUser();

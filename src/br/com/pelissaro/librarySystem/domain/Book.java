@@ -1,4 +1,4 @@
-package br.com.pelissaro.librarySystem.Domain;
+package br.com.pelissaro.librarySystem.domain;
 
 public class Book {
     private int id;
@@ -51,7 +51,7 @@ public class Book {
     @Override
     public String toString() {
         return "Book{" +
-                "id=" + id +
+                "id= " + id +
                 ", title='" + title + '\'' +
                 ", author='" + author + '\'' +
                 ", available=" + available +

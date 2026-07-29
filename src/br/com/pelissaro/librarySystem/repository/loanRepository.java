@@ -1,6 +1,6 @@
-package br.com.pelissaro.librarySystem.Repository;
+package br.com.pelissaro.librarySystem.repository;
 
-import br.com.pelissaro.librarySystem.Domain.Loan;
+import br.com.pelissaro.librarySystem.domain.Loan;
 
 import java.util.ArrayList;
 import java.util.List;

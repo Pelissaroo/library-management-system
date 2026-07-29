@@ -21,12 +21,14 @@ Compile and run the project using your preferred Java IDE (IntelliJ IDEA, Eclips
 - List active loans
 - Interactive console menu
 - Automatic ID generation
+- Input validation
+- Exception handling
+
+
 
 
 ## Next Features
 
-- Input validation
-- Exception handling
 - Remove books
 - Remove users
 - Return borrowed books
@@ -44,9 +46,10 @@ Compile and run the project using your preferred Java IDE (IntelliJ IDEA, Eclips
 src
 ├── App
 ├── Domain
+├── Exception
 ├── Repository
 ├── Service
-└── Main.java
+└── Main
 
 ## Current Data Storage
 

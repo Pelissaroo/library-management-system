@@ -1,4 +1,4 @@
-package br.com.pelissaro.librarySystem.Domain;
+package br.com.pelissaro.librarySystem.domain;
 
 public class User {
     private String name;
@@ -70,12 +70,11 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "name='" + name + '\'' +
-                ", cpf='" + cpf + '\'' +
-                ", address='" + address + '\'' +
+                ", UserId = " + id +
+                " name = " + name + '\'' +
+                ", cpf = " + cpf.substring(0,3)+"."+ cpf.substring(3,6)+"."+ cpf.substring(6,9)+"-"+ cpf.substring(9,11) + '\'' +
+                ", address= " + address + '\'' +
                 ", adressNumber=" + addressNumber +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", UserId=" + id +
-                '}';
+                ", phoneNumber= " + "(" + phoneNumber.substring (0,2) + ") " + phoneNumber.substring (2,7) + "-" + phoneNumber.substring(7,11) + '}';
     }
 }
