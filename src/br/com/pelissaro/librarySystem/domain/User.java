@@ -1,5 +1,7 @@
 package br.com.pelissaro.librarySystem.domain;
 
+import java.util.Objects;
+
 public class User {
     private String name;
     private int id;
@@ -74,7 +76,21 @@ public class User {
                 " name = " + name + '\'' +
                 ", cpf = " + cpf.substring(0,3)+"."+ cpf.substring(3,6)+"."+ cpf.substring(6,9)+"-"+ cpf.substring(9,11) + '\'' +
                 ", address= " + address + '\'' +
-                ", adressNumber=" + addressNumber +
+                ", addressNumber=" + addressNumber +
                 ", phoneNumber= " + "(" + phoneNumber.substring (0,2) + ") " + phoneNumber.substring (2,7) + "-" + phoneNumber.substring(7,11) + '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id == user.id && Objects.equals(cpf, user.cpf);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, cpf);
+    }
+
+
 }

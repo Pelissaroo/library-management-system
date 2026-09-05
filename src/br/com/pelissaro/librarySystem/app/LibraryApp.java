@@ -15,7 +15,6 @@ public class LibraryApp {
             BookService bookService = new BookService();
             UserService userService = new UserService();
             LoanService loanService = new LoanService();
-            DataLoader dataLoader = new DataLoader(bookService, userService);
 
 
             Scanner scanner = new Scanner(System.in);
@@ -422,6 +421,7 @@ public class LibraryApp {
                                             System.out.println("---------------");
                                             System.out.println("1 - Edit Title");
                                             System.out.println("2 - Edit author ");
+                                            System.out.println("3 - !Delete book!");
                                             System.out.println("0 - Exit to Main-Menu");
 
                                             int answer2 = scanner.nextInt();
@@ -463,7 +463,20 @@ public class LibraryApp {
                                                                 System.out.println("Invalid author name");
                                                             }
                                                         }
-                                                        break;
+                                                    break;
+                                                case 3:
+                                                    System.out.println("You sure than delete book? (s/n)");
+                                                    String answer = scanner.nextLine();
+
+                                                    if (answer.equals("s")){
+                                                        bookService.deleteBook(foundBookToEdit);
+                                                        System.out.println("book deleted.");
+                                                        bookIdValid = false;
+                                                    } else if (answer.equals("n")) {
+                                                        System.out.println("returning to menu...");
+                                                        continue;
+                                                    }
+                                                    break;
 
                                                 case 0:
                                                     bookIdValid = false;

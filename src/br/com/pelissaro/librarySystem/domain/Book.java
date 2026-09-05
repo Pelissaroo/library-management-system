@@ -1,8 +1,9 @@
 package br.com.pelissaro.librarySystem.domain;
 
+import java.util.Objects;
+
 public class Book {
     private int id;
-    private static int nextId;
     private String title;
     private String author;
     private boolean available;
@@ -10,7 +11,6 @@ public class Book {
     public Book(String title, String author) {
         this.title = title;
         this.author = author;
-        this.id = ++nextId;
         this.available = true;
     }
 
@@ -56,5 +56,17 @@ public class Book {
                 ", author='" + author + '\'' +
                 ", available=" + available +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return id == book.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }

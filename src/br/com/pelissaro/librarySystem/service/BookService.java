@@ -51,13 +51,16 @@ public class BookService {
     }
 
     public void updateTitle(Book book, String title){
-        book.setTitle(title);
+        bookRepository.updateTitle(book, title);
     }
 
     public void updateAuthor(Book book, String author){
-        book.setAuthor(author);
+        bookRepository.updateAuthor(book, author);
     }
 
+    public void deleteBook(Book book){
+        bookRepository.deleteBook(book);
+    }
 
 
 }
