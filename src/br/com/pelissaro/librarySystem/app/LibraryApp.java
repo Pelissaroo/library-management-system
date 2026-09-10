@@ -7,6 +7,7 @@ import br.com.pelissaro.librarySystem.service.BookService;
 import br.com.pelissaro.librarySystem.service.UserService;
 import br.com.pelissaro.librarySystem.service.LoanService;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class LibraryApp {
@@ -56,44 +57,46 @@ public class LibraryApp {
                         }
                         break;
                     case 4:
-                        boolean validTitle = false;
-                        boolean validAuthor = false;
+                        boolean bookCreated = false;
 
-                        String title = null;
-                        String author = null;
+                        while (!bookCreated){
+                            boolean validTitle = false;
+                            boolean validAuthor = false;
 
-                            while (!validTitle){
+                            String title = null;
+                            String author = null;
+
+                            while (!validTitle || !validAuthor){
+                                System.out.println();
                                 System.out.println("Enter the book title: ");
                                 String inputTitle = scanner.nextLine();
+
+                                System.out.println("Enter the author name : ");
+                                String inputAuthor = scanner.nextLine();
 
                                 try {
                                     bookService.validateInputString(inputTitle);
                                     title = inputTitle;
                                     validTitle = true;
-                                } catch (IllegalArgumentException e){
-                                    System.out.println("type a valid title");
-                                }
-                            }
 
-                            while (!validAuthor) {
-                                System.out.println("Enter the author name : ");
-                                String inputAuthor = scanner.nextLine();
-
-                                try {
                                     bookService.validateInputString(inputAuthor);
                                     author = inputAuthor;
                                     validAuthor = true;
-                                } catch (IllegalArgumentException e) {
-                                    System.out.println("type a valid author name");
+
+                                } catch (IllegalArgumentException e){
+                                    System.out.println(e.getMessage());
                                 }
                             }
+
 
                             try {
                                 bookService.createNewBook(title, author);
                                 System.out.println("Book created successfully!");
-                            } catch (IllegalArgumentException e) {
-                                System.out.println();
-                            } break;
+                                bookCreated = true;
+                            } catch (IllegalArgumentException | DuplicateEntryException e) {
+                                System.out.println(e.getMessage());
+                            }
+                        } break;
 
 
                     case 5:
@@ -149,7 +152,6 @@ public class LibraryApp {
                                         validAddress = true;
                                     } catch (IllegalArgumentException e) {
                                         System.out.println("Invalid Address.");
-
                                     }
                                 }
 
@@ -428,23 +430,38 @@ public class LibraryApp {
                                             scanner.nextLine();
                                             switch (answer2) {
                                                 case 1:
-                                                    boolean validNewTitle = false;
+                                                    boolean titleUpdated = false;
+                                                    String newTitle = null;
 
-                                                    while (!validNewTitle){
-                                                        System.out.println("New title: ");
-                                                        String newTitle = scanner.nextLine();
+                                                    while (!titleUpdated){
+
+                                                        boolean validNewTitle = false;
+
+                                                        while (!validNewTitle){
+                                                            System.out.println("New title: ");
+                                                            String title = scanner.nextLine();
+
+                                                            try{
+                                                                bookService.validateInputString(title);
+                                                                newTitle = title;
+                                                                validNewTitle = true;
+
+                                                            } catch (IllegalArgumentException e){
+                                                                System.out.println("Invalid title");
+                                                                System.out.println();
+                                                            }
+                                                        }
 
                                                         try{
-                                                            bookService.validateInputString(newTitle);
                                                             bookService.updateTitle(foundBookToEdit, newTitle);
+                                                            titleUpdated = true;
                                                             System.out.println("Changes saved successfully!");
-                                                            validNewTitle = true;
-                                                        } catch (IllegalArgumentException e){
-                                                            System.out.println("Invalid title");
+
+                                                        } catch (DuplicateEntryException e){
+                                                            System.out.println(e.getMessage());
                                                             System.out.println();
                                                         }
-                                                    }
-                                                    break;
+                                                    }break;
 
                                                 case 2:
                                                     boolean validNewAuthorName = false;

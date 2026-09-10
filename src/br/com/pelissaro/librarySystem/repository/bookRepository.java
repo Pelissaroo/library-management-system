@@ -2,6 +2,7 @@ package br.com.pelissaro.librarySystem.repository;
 
 import br.com.pelissaro.librarySystem.conn.ConnectionFactory;
 import br.com.pelissaro.librarySystem.domain.Book;
+import br.com.pelissaro.librarySystem.exception.DuplicateEntryException;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -20,7 +21,10 @@ public class bookRepository {
             stmt.executeUpdate();
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            if (e.getMessage().contains("title")) {
+                throw new DuplicateEntryException("There is already a book with that title.");
+            }
+            throw new RuntimeException("Error on connect DataBase", e);
         }
     }
 
@@ -41,7 +45,7 @@ public class bookRepository {
                 }
             }
                 catch (SQLException e) {
-                System.out.println(e.getMessage());
+                    System.out.println(e.getMessage());
                 }
         return book;
     }
@@ -80,7 +84,10 @@ public class bookRepository {
             stmt.executeUpdate();
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            if (e.getMessage().contains("title")) {
+                throw new DuplicateEntryException("There is already a book with that title.");
+            }
+            throw new RuntimeException("Error on connect DataBase", e);
         }
     }
 
@@ -115,5 +122,6 @@ public class bookRepository {
         }
 
     }
+
 }
 
