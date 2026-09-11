@@ -10,13 +10,14 @@ import java.util.ArrayList;
 public class bookRepository {
 
     public void addBooks(Book book) {
-        String sql = "INSERT INTO library_system.book (title,author) VALUES (?,?);";
+        String sql = "INSERT INTO library_system.book (title,author,quantity_available) VALUES (?,?,?);";
 
         try (Connection conn = ConnectionFactory.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, book.getTitle());
             stmt.setString(2, book.getAuthor());
+            stmt.setInt(3, book.getQuantity_available());
 
             stmt.executeUpdate();
 
@@ -40,7 +41,7 @@ public class bookRepository {
 
                 ResultSet rs = stmt.executeQuery();
                 if (rs.next()){
-                    book = new Book(rs.getString("title"),rs.getString("author"));
+                    book = new Book(rs.getString("title"),rs.getString("author"), rs.getInt("quantity_available"));
                     book.setId(rs.getInt("id"));
                 }
             }
@@ -61,7 +62,7 @@ public class bookRepository {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()){
-                Book book = new Book(rs.getString("title"), rs.getString("author"));
+                Book book = new Book(rs.getString("title"), rs.getString("author"), rs.getInt("quantity_available"));
                 book.setId(rs.getInt("id"));
                 books.add(book);
             }
@@ -123,5 +124,20 @@ public class bookRepository {
 
     }
 
+    public void addStock(int quantity, Book book){
+        String sql = "UPDATE book SET quantity_available = quantity_available + ? WHERE id = ?";
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+                stmt.setInt(1,quantity);
+                stmt.setInt(2,book.getId());
+
+                stmt.executeUpdate();
+
+            } catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+    }
 }
 

@@ -32,6 +32,7 @@ Compile and run the project using your preferred Java IDE (IntelliJ IDEA, Eclips
 - Input validation
 - Exception handling
 - Remove books on data Base
+- Book stock management
 
 ## Next Features
 

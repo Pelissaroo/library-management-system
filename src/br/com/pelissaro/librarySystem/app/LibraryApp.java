@@ -62,9 +62,11 @@ public class LibraryApp {
                         while (!bookCreated){
                             boolean validTitle = false;
                             boolean validAuthor = false;
+                            boolean validQuantity = false;
 
                             String title = null;
                             String author = null;
+                            int quantityAvailable = 0;
 
                             while (!validTitle || !validAuthor){
                                 System.out.println();
@@ -88,9 +90,21 @@ public class LibraryApp {
                                 }
                             }
 
+                            while(!validQuantity){
+                                try {
+                                    System.out.println("Enter quantity :");
+                                    String input = scanner.nextLine();
+                                    quantityAvailable = Integer.parseInt(input);
+                                    validQuantity = true;
+                                } catch (IllegalArgumentException e){
+                                    System.out.println("quantity must be a number.");
+                                    System.out.println();
+                                }
+                            }
+
 
                             try {
-                                bookService.createNewBook(title, author);
+                                bookService.createNewBook(title, author,quantityAvailable);
                                 System.out.println("Book created successfully!");
                                 bookCreated = true;
                             } catch (IllegalArgumentException | DuplicateEntryException e) {
@@ -423,7 +437,8 @@ public class LibraryApp {
                                             System.out.println("---------------");
                                             System.out.println("1 - Edit Title");
                                             System.out.println("2 - Edit author ");
-                                            System.out.println("3 - !Delete book!");
+                                            System.out.println("3 - Add stock");
+                                            System.out.println("4 - !Delete book!");
                                             System.out.println("0 - Exit to Main-Menu");
 
                                             int answer2 = scanner.nextInt();
@@ -481,7 +496,34 @@ public class LibraryApp {
                                                             }
                                                         }
                                                     break;
+
                                                 case 3:
+                                                    boolean quantityValid = false;
+
+                                                    while (!quantityValid){
+                                                        System.out.println("quantity: ");
+                                                        String input = scanner.nextLine();
+
+                                                        int quantity = 0;
+
+                                                        try{
+                                                            quantity = Integer.parseInt(input);
+                                                        } catch (IllegalArgumentException e){
+                                                            System.out.println("quantity must be a number.");
+                                                            System.out.println();
+                                                            continue;
+                                                        }
+
+                                                        try {
+                                                            bookService.addStock(quantity, foundBookToEdit);
+                                                            quantityValid = true;
+                                                            System.out.println("Stock updated successfully");
+                                                        } catch (IllegalArgumentException e){
+                                                            System.out.println(e.getMessage());
+                                                        }
+                                                    }break;
+
+                                                case 4:
                                                     System.out.println("You sure than delete book? (s/n)");
                                                     String answer = scanner.nextLine();
 

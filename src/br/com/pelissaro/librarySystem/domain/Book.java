@@ -6,12 +6,12 @@ public class Book {
     private int id;
     private String title;
     private String author;
-    private boolean available;
+    private int quantity_available;
 
-    public Book(String title, String author) {
+    public Book(String title, String author, int quantity_available) {
         this.title = title;
         this.author = author;
-        this.available = true;
+        this.quantity_available = quantity_available;
     }
 
     public int getId() {
@@ -31,7 +31,7 @@ public class Book {
     }
 
     public boolean isAvailable() {
-        return available;
+        return quantity_available > 0;
     }
 
     public void setTitle(String title) {
@@ -43,18 +43,24 @@ public class Book {
     }
 
     public void markAsBorrowed(){
-        available = false;
+        setQuantity_available(getQuantity_available() - 1);
     }
 
+    public int getQuantity_available() {
+        return quantity_available;
+    }
 
+    public void setQuantity_available(int quantity_available) {
+        this.quantity_available = quantity_available;
+    }
 
     @Override
     public String toString() {
         return "Book{" +
-                "id= " + id +
+                "id=" + id +
                 ", title='" + title + '\'' +
                 ", author='" + author + '\'' +
-                ", available=" + available +
+                ", quantity_available=" + quantity_available +
                 '}';
     }
 

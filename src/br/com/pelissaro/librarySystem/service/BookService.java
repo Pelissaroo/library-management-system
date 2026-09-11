@@ -10,7 +10,7 @@ import java.util.List;
 public class BookService {
     bookRepository bookRepository = new bookRepository();
 
-    public void createNewBook(String title, String author){
+    public void createNewBook(String title, String author,int quantity_available){
         if (title.isBlank()){
             throw new IllegalArgumentException("Book title cannot be empty");
         }
@@ -19,7 +19,12 @@ public class BookService {
             throw new IllegalArgumentException("Author name cannot be empty");
         }
 
-        Book book = new Book(title, author);
+        if (quantity_available == 0){
+            throw new IllegalArgumentException("quantity cannot be equal or less than 0");
+        }
+
+
+        Book book = new Book(title, author,quantity_available);
         bookRepository.addBooks(book);
     }
 
@@ -31,6 +36,10 @@ public class BookService {
         for (Book books: findBooks){
             System.out.println(books);
         }
+    }
+
+    public void addStock(int quantity, Book book){
+        bookRepository.addStock(quantity, book);
     }
 
     public Book findBookByID(int id){
@@ -61,4 +70,6 @@ public class BookService {
     public void deleteBook(Book book){
         bookRepository.deleteBook(book);
     }
+
+
 }
