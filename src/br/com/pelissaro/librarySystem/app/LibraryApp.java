@@ -17,16 +17,15 @@ public class LibraryApp {
             UserService userService = new UserService();
             LoanService loanService = new LoanService();
 
-
             Scanner scanner = new Scanner(System.in);
 
             boolean running = true;
 
             while (running) {
                 System.out.println();
-                System.out.println("--------------------------");
-                System.out.println("Library System Terminal");
-                System.out.println("--------------------------");
+                System.out.println("---------------------------");
+                System.out.println("  Library System Terminal");
+                System.out.println("---------------------------");
                 System.out.println("-- Menu --");
                 System.out.println("1 - Show users");
                 System.out.println("2 - Show books");
@@ -295,11 +294,12 @@ public class LibraryApp {
 
                                         while (validateUserID) {
                                             System.out.println("---------------");
-                                            System.out.println("1 - Edit Name");
+                                            System.out.println("1 - Edit name");
                                             System.out.println("2 - Edit CPF");
-                                            System.out.println("3 - Edit Address");
-                                            System.out.println("4 - Edit Address number");
-                                            System.out.println("5 - Edit Phone number");
+                                            System.out.println("3 - Edit address");
+                                            System.out.println("4 - Edit address number");
+                                            System.out.println("5 - Edit phone number");
+                                            System.out.println("6 - !Delete user!");
                                             System.out.println("0 - Exit to Main-Menu");
                                             int answer = scanner.nextInt();
                                             scanner.nextLine();
@@ -332,11 +332,17 @@ public class LibraryApp {
 
                                                         try {
                                                             userService.validateCpf(newCPF);
-                                                            userService.updateCPF(user, newCPF);
-                                                            validNewCpfForUpdate = true;
-                                                            System.out.println("Changes saved successfully!");
                                                         } catch (IllegalArgumentException e){
                                                             System.out.println("Type only numbers");
+                                                        }
+
+                                                        try {
+                                                            userService.updateCPF(user, newCPF);
+                                                            validNewCpfForUpdate = true;
+                                                            System.out.println("Changes save successfully");
+                                                        } catch (DuplicateEntryException e){
+                                                            System.out.println(e.getMessage());
+                                                            System.out.println();
                                                         }
                                                     }break;
 
@@ -387,14 +393,34 @@ public class LibraryApp {
 
                                                         try{
                                                             userService.validatePhoneNumber(newPhoneNumber);
+                                                        } catch (IllegalArgumentException e){
+                                                            System.out.println("Invalid phone number");
+                                                            System.out.println();
+                                                            continue;
+                                                        }
+
+                                                        try {
                                                             userService.updatePhoneNumber(user, newPhoneNumber);
                                                             validNewPhoneNumber = true;
                                                             System.out.println("Changes saved successfully!");
-                                                        } catch (IllegalArgumentException e){
-                                                            System.out.println("Invalid phone number");
+                                                        } catch (DuplicateEntryException e){
+                                                            System.out.println(e.getMessage());
+                                                            System.out.println();
                                                         }
                                                     } break;
 
+                                                case 6:
+                                                    System.out.println("You sure than delete user? (s/n)");
+                                                    String input = scanner.nextLine();
+
+                                                    if (input.equals("s")){
+                                                        userService.deleteUser(user);
+                                                        validateUserID = false;
+                                                        System.out.println("user deleted successfully!");
+                                                    } else if (input.equals("n")) {
+                                                        System.out.println("returning to menu...");
+                                                    }
+                                                    break;
                                                 case 0:
                                                     validateUserID = false;
                                                     break;

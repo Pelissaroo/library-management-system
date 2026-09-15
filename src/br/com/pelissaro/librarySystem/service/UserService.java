@@ -9,10 +9,9 @@ import java.util.List;
 
 public class UserService {
     userRepository userRepository = new userRepository();
-    private static int nextID;
 
-    public void registerUser(String name, String cpf, String adress, int adressNumber, String phoneNumber){
-        User user = new User(name, ++nextID, cpf, adress, adressNumber, phoneNumber);
+    public void registerUser(String name, String cpf, String address, int addressNumber, String phoneNumber){
+        User user = new User(name, cpf, address, addressNumber, phoneNumber);
         userRepository.addUsers(user);
     }
 
@@ -56,22 +55,26 @@ public class UserService {
     }
 
     public void updateName(User user, String name) {
-        user.setName(name);
+        userRepository.updateName(user,name);
     }
 
     public void updateCPF(User user, String cpf){
-        user.setCpf(cpf);
+        userRepository.updateCPF(user,cpf);
     }
 
     public void updateAddress(User user, String address){
-        user.setAddress(address);
+        userRepository.updateAddress(user,address);
     }
 
     public void updateAddressNumber(User user, int addressNumber){
-        user.setAddressNumber(addressNumber);
+        userRepository.updateAddressNumber(user,addressNumber);
     }
 
     public void updatePhoneNumber(User user, String phoneNumber){
-        user.setPhoneNumber(phoneNumber);
+        userRepository.updatePhoneNumber(user,phoneNumber);
+    }
+
+    public void deleteUser(User user){
+        userRepository.deleteUser(user);
     }
 }
