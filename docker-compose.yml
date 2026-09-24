@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8
+    container_name: mysql_libraryManagement
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: admin1406
+      MYSQL_DATABASE: library_system
+      TZ: America/Sao_Paulo
+    command: --default-time-zone='America/Sao_Paulo'
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_library_data:/var/lib/mysql
+
+volumes:
+  mysql_library_data:

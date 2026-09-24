@@ -1,5 +1,7 @@
 package br.com.pelissaro.librarySystem.domain;
 
+import java.util.Objects;
+
 public class User {
     private String name;
     private int id;
@@ -9,14 +11,12 @@ public class User {
     private String phoneNumber;
     private boolean active;
 
-    public User(String name,int id, String cpf, String adress, int adressNumber, String phoneNumber) {
+    public User(String name, String cpf, String address, int addressNumber, String phoneNumber) {
         this.name = name;
-        this.id = id;
         this.cpf = cpf;
-        this.address = adress;
-        this.addressNumber = adressNumber;
+        this.address = address;
+        this.addressNumber = addressNumber;
         this.phoneNumber = phoneNumber;
-        this.active = true;
     }
 
     public String getName() {
@@ -67,14 +67,37 @@ public class User {
         return active;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
     @Override
     public String toString() {
         return "User{" +
-                ", UserId = " + id +
-                " name = " + name + '\'' +
+                "UserId = " + id +
+                ",name = " + name + '\'' +
                 ", cpf = " + cpf.substring(0,3)+"."+ cpf.substring(3,6)+"."+ cpf.substring(6,9)+"-"+ cpf.substring(9,11) + '\'' +
                 ", address= " + address + '\'' +
-                ", adressNumber=" + addressNumber +
-                ", phoneNumber= " + "(" + phoneNumber.substring (0,2) + ") " + phoneNumber.substring (2,7) + "-" + phoneNumber.substring(7,11) + '}';
+                ", addressNumber=" + addressNumber +
+                ", phoneNumber= " + "(" + phoneNumber.substring (0,2) + ") " + phoneNumber.substring (2,7) + "-" + phoneNumber.substring(7,11) +
+                ", active= " + active + '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id == user.id && Objects.equals(cpf, user.cpf);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, cpf);
+    }
+
+
 }

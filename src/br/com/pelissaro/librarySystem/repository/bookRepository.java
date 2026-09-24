@@ -1,27 +1,173 @@
 package br.com.pelissaro.librarySystem.repository;
 
+import br.com.pelissaro.librarySystem.conn.ConnectionFactory;
 import br.com.pelissaro.librarySystem.domain.Book;
+import br.com.pelissaro.librarySystem.exception.DuplicateEntryException;
 
+import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public class bookRepository {
-    private ArrayList<Book> books = new ArrayList<>();
 
     public void addBooks(Book book) {
-        books.add(book);
-    }
+        String sql = "INSERT INTO library_system.book (title,author,quantity_available) VALUES (?,?,?);";
 
-    public List<Book> findAll() {
-        return books;
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, book.getTitle());
+            stmt.setString(2, book.getAuthor());
+            stmt.setInt(3, book.getQuantity_available());
+
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            if (e.getMessage().contains("title")) {
+                throw new DuplicateEntryException("There is already a book with that title.");
+            }
+            throw new RuntimeException("Error on connect DataBase", e);
+        }
     }
 
     public Book findById(int id){
-        for (Book book: books) {
-            if (book.getId() == id)
-                return book;
+        String sql = "SELECT * FROM library_system.book WHERE id = ?";
+
+        Book book = null;
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+                stmt.setInt(1, id);
+
+                ResultSet rs = stmt.executeQuery();
+                if (rs.next()){
+                    book = new Book(rs.getString("title"),rs.getString("author"), rs.getInt("quantity_available"));
+                    book.setId(rs.getInt("id"));
+                }
+            }
+                catch (SQLException e) {
+                    System.out.println(e.getMessage());
+                }
+        return book;
+    }
+
+    public ArrayList<Book> findAll() {
+        String sql = "SELECT * FROM library_system.book";
+
+        ArrayList <Book> books = new ArrayList<>();
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()){
+                Book book = new Book(rs.getString("title"), rs.getString("author"), rs.getInt("quantity_available"));
+                book.setId(rs.getInt("id"));
+                books.add(book);
+            }
         }
-        return null;
+        catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return books;
+    }
+
+    public void updateTitle(Book book, String title){
+        String sql = "UPDATE library_system.book SET title = ? WHERE id = ?";
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)){
+
+            stmt.setString(1, title);
+            stmt.setInt(2, book.getId());
+
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            if (e.getMessage().contains("title")) {
+                throw new DuplicateEntryException("There is already a book with that title.");
+            }
+            throw new RuntimeException("Error on connect DataBase", e);
+        }
+    }
+
+    public void updateAuthor(Book book, String author){
+        String sql = "UPDATE library_system.book SET author = ? WHERE id = ?";
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)){
+
+            stmt.setString(1, author);
+            stmt.setInt(2, book.getId());
+
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void deleteBook(Book book){
+        String sql = "DELETE FROM library_system.book WHERE id = ?";
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)){
+
+            stmt.setInt(1, book.getId());
+
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+    }
+
+    public void addStock(int quantity, Book book){
+        String sql = "UPDATE book SET quantity_available = quantity_available + ? WHERE id = ?";
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+                stmt.setInt(1,quantity);
+                stmt.setInt(2,book.getId());
+
+                stmt.executeUpdate();
+
+            } catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void markAsBorrowed(Book book){
+        String sql = "UPDATE library_system.book SET quantity_available = quantity_available - 1 WHERE id = ?";
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)){
+
+            stmt.setInt(1, book.getId());
+
+            stmt.executeUpdate();
+
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void markAsReturned(Book book){
+        String sql = "UPDATE library_system.book SET quantity_available = quantity_available + 1 WHERE id = ?";
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)){
+
+            stmt.setInt(1, book.getId());
+
+            stmt.executeUpdate();
+
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
     }
 }
 
