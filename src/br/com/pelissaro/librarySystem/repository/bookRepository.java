@@ -139,5 +139,35 @@ public class bookRepository {
             System.out.println(e.getMessage());
         }
     }
+
+    public void markAsBorrowed(Book book){
+        String sql = "UPDATE library_system.book SET quantity_available = quantity_available - 1 WHERE id = ?";
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)){
+
+            stmt.setInt(1, book.getId());
+
+            stmt.executeUpdate();
+
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void markAsReturned(Book book){
+        String sql = "UPDATE library_system.book SET quantity_available = quantity_available + 1 WHERE id = ?";
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)){
+
+            stmt.setInt(1, book.getId());
+
+            stmt.executeUpdate();
+
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+    }
 }
 

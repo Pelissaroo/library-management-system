@@ -34,10 +34,12 @@ Compile and run the project using your preferred Java IDE (IntelliJ IDEA, Eclips
 - Remove books on data Base
 - Book stock management
 - User migrate to data base
+- Loan migrate to data base
+- Return loans
 
 ## Next Features
 
-- JDBC migration for Loan repository
+- add Spring Boot to the project
 
 ## Technologies
 
@@ -66,7 +68,7 @@ src
 - MySQL (via Docker) — migration in progress
     - **Book**: fully migrated to JDBC (create, read, update, delete)
     - **User**: fully migrated to JDBC (create, read, update, delete)
-    - **Loan**: still in-memory (ArrayList)
+    - **Loan**: fully migrated to JDBC (create, read, update)
 
 ## Project Status
 

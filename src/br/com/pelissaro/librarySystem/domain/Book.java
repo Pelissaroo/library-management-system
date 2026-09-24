@@ -42,10 +42,6 @@ public class Book {
         this.author = author;
     }
 
-    public void markAsBorrowed(){
-        setQuantity_available(getQuantity_available() - 1);
-    }
-
     public int getQuantity_available() {
         return quantity_available;
     }

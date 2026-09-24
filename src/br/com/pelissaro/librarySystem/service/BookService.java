@@ -42,6 +42,10 @@ public class BookService {
         bookRepository.addStock(quantity, book);
     }
 
+    public void markAsBorrowed(Book book){
+        bookRepository.markAsBorrowed(book);
+    }
+
     public Book findBookByID(int id){
         if (id < 1){
             throw new IllegalArgumentException("ID cannot be less than 0");

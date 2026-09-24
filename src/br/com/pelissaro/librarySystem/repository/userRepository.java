@@ -1,7 +1,6 @@
 package br.com.pelissaro.librarySystem.repository;
 
 import br.com.pelissaro.librarySystem.conn.ConnectionFactory;
-import br.com.pelissaro.librarySystem.domain.Book;
 import br.com.pelissaro.librarySystem.domain.User;
 import br.com.pelissaro.librarySystem.exception.DuplicateEntryException;
 
@@ -10,10 +9,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class userRepository {
-    private ArrayList<User> users = new ArrayList<>();
 
     public void addUsers(User user) {
         String sql = "INSERT INTO library_system.user (name, cpf, address, address_number, phone_number) VALUES (?,?,?,?,?);";
