@@ -1,75 +1,76 @@
-# library-management-system
-A console-based library management system developed in Java to practice Object-Oriented Programming (OOP), software architecture, and business rule implementation.
+# Library Management System
+
+A library management system developed in Java to practice Object-Oriented Programming (OOP), layered architecture, database integration, and business rule implementation. The project is being migrated from a console-based application to a REST API using Spring Boot.
 
 ## Getting Started
 
 Clone the repository:
 
 ```bash
-git clone https://github.com/Pelissaroo/library-management-system
+git clone https://github.com/Pelissaroo/library-management-system.git
 ```
 
-This project uses MySQL via Docker. With Docker installed, start the database:
+Start the MySQL database using Docker Compose:
 
 ```bash
 docker-compose up -d
 ```
 
-Compile and run the project using your preferred Java IDE (IntelliJ IDEA, Eclipse or VS Code). Dependencies are managed via Maven (see `pom.xml`).
+Open the project in your preferred Java IDE and run it using Maven. Make sure Java and Docker are installed and that the database configuration is set correctly.
 
 ## Features
 
-- Register books
-- Register users
-- Register book loans
-- Edit books
-- Edit users
-- List books
-- List users
-- List active loans
-- Interactive console menu
-- Automatic ID generation
-- Input validation
-- Exception handling
-- Remove books on data Base
-- Book stock management
-- User migrate to data base
-- Loan migrate to data base
-- Return loans
-
-## Next Features
-
-- add Spring Boot to the project
+* Book management (CRUD)
+* User management (CRUD)
+* Book loan registration
+* Loan listing and search by ID
+* Book stock management
+* Loan returns
+* Automatic ID generation
+* Business rule validation
+* Custom exception handling
+* REST API development with Spring Boot
+* Request validation using Bean Validation
+* Database integration with MySQL
 
 ## Technologies
 
-- Java
-- MySQL
-- JDBC
-- Docker
-- Maven
-- Object-Oriented Programming (OOP)
-- Layered Architecture
+* Java
+* Spring Boot
+* Spring Web
+* Spring Data JPA
+* Hibernate
+* MySQL
+* Docker
+* Maven
+* DBeaver
+* Object-Oriented Programming (OOP)
+* Layered Architecture
 
 ## Project Structure
-```
+
+```text
 src
-├── App
-├── conn
-├── Domain
-├── Exception
-├── Repository
-├── Service
-└── Main
+└── main
+    ├── java
+    │   └── br/com/pelissaro/librarySystem
+    │       ├── controller
+    │       ├── domain
+    │       ├── exception
+    │       ├── repository
+    │       ├── service
+    │       └── LibraryManagementSystemApplication.java
+    └── resources
+        └── application.properties
 ```
 
-## Current Data Storage
+## Database
 
-- MySQL (via Docker) — migration in progress
-    - **Book**: fully migrated to JDBC (create, read, update, delete)
-    - **User**: fully migrated to JDBC (create, read, update, delete)
-    - **Loan**: fully migrated to JDBC (create, read, update)
+* MySQL running in Docker
+* Database persistence using Spring Data JPA
+* Entity mapping with Hibernate
 
 ## Project Status
 
-🚧 In development
+✅ Completed — developed as a learning project to practice Java, Object-Oriented Programming, database integration, and REST API development with Spring Boot.
+
